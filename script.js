@@ -207,14 +207,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const origText = submitBtn.textContent;
 
     // Check access key is set
-    const emailInput = form.querySelector('input[type="email"]');
-const emailVal = emailInput.value.trim();
-const emailPattern = /^[^\s@]+@[^\s@]+\.(com|in|net|org|edu|gov|co|io|me|info|biz|gmail|yahoo|outlook|hotmail)(\.[a-z]{2})?$/i;
-if (!emailPattern.test(emailVal)) {
-  formStatus.className = 'form-status show err';
-  formStatus.textContent = '✕ Please enter a valid email address (e.g. name@gmail.com)';
-  return;
-}
+       const emailInput = form.querySelector('input[type="email"]');
+    const emailVal = emailInput.value.trim().toLowerCase();
+    const [localPart, domainPart] = emailVal.split('@');
+    const domainParts = (domainPart || '').split('.');
+    const domainName = domainParts[0];
+    const extension = domainParts[domainParts.length - 1];
+    const blockedDomains = ['test.com','fake.com','dummy.com','example.com','mailinator.com','guerrillamail.com','tempmail.com','yopmail.com','trashmail.com','aaa.com','abc.com','xyz.com','asdf.com','qwerty.com'];
+    const blockedLocal = ['test','fake','dummy','asdf','qwerty','abc','xyz','aaa','bbb','ccc','123','temp','noreply'];
+    const isInvalid =
+      (emailVal.match(/@/g) || []).length !== 1 ||
+      !localPart || localPart.length < 2 ||
+      !domainPart || !domainPart.includes('.') ||
+      domainName.length < 2 ||
+      !/^[a-z]{2,6}$/.test(extension) ||
+      blockedDomains.includes(domainPart) ||
+      blockedLocal.includes(localPart) ||
+      /^(.)\1{2,}$/.test(localPart) ||
+      /^\d+$/.test(localPart);
+    if (isInvalid) {
+      formStatus.className = 'form-status show err';
+      formStatus.textContent = '✕ Please enter a valid email address (e.g. name@gmail.com)';
+      return;
+    }
     const keyField = document.getElementById('w3f_key');
     if (!keyField || keyField.value === 'f4da3e41-6cfc-4776-ac6a-c92bbe3c826c') {
       formStatus.className = 'form-status show err';
