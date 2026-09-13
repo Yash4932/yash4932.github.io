@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Page Not Found | Yash Shah Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .page-404{
+    min-height:100vh; display:flex; align-items:center; justify-content:center;
+    flex-direction:column; text-align:center; gap:28px; padding:40px 24px;
+  }
+  .err-code{
+    font-family:'Space Grotesk',sans-serif; font-size:clamp(80px,18vw,160px);
+    font-weight:700; line-height:1;
+    background:linear-gradient(135deg,var(--accent),var(--accent-3));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .err-svg{ margin-bottom:8px; }
+  .err-svg svg{ width:80px; height:80px; opacity:.3; }
+  .page-404 h2{ font-size:26px; margin-bottom:4px; }
+  .page-404 p{ max-width:360px; margin:0 auto; }
+  .err-query{
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--text-faint);
+    background:var(--panel); border:1px solid var(--border); border-radius:10px;
+    padding:16px 22px; line-height:2; text-align:left;
+  }
+  .err-query .kw{ color:var(--accent-3); }
+  .err-query .str{ color:var(--accent-2); }
+  .err-query .cm{ color:var(--text-faint); }
+</style>
+</head>
+<body>
+<div class="page-404">
+  <div class="err-svg">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"/>
+      <line x1="12" x2="12" y1="9" y2="13"/>
+      <line x1="12" x2="12.01" y1="17" y2="17"/>
+    </svg>
+  </div>
+  <div class="err-code">404</div>
+  <h2>Query returned no results.</h2>
+  <p>Looks like this page doesn't exist in the dataset. Let's get you back to somewhere useful.</p>
+  <div class="err-query">
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> pages<br>
+    <span class="kw">WHERE</span> url = <span class="str">'current_page'</span><br>
+    <span class="cm">-- 0 rows returned</span>
+  </div>
+  <a href="index.html" class="btn btn-primary">↩ Back to Portfolio</a>
+</div>
+<script>
+  const saved = localStorage.getItem('ys-theme');
+  const pref = window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', saved || pref);
+</script>
+</body>
+</html>
