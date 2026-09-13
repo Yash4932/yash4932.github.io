@@ -207,8 +207,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const origText = submitBtn.textContent;
 
     // Check access key is set
+    const emailInput = form.querySelector('input[type="email"]');
+const emailVal = emailInput.value.trim();
+const emailPattern = /^[^\s@]+@[^\s@]+\.(com|in|net|org|edu|gov|co|io|me|info|biz|gmail|yahoo|outlook|hotmail)(\.[a-z]{2})?$/i;
+if (!emailPattern.test(emailVal)) {
+  formStatus.className = 'form-status show err';
+  formStatus.textContent = '✕ Please enter a valid email address (e.g. name@gmail.com)';
+  return;
+}
     const keyField = document.getElementById('w3f_key');
-    if (!keyField || keyField.value === 'YOUR_ACCESS_KEY') {
+    if (!keyField || keyField.value === 'f4da3e41-6cfc-4776-ac6a-c92bbe3c826c') {
       formStatus.className = 'form-status show err';
       formStatus.textContent = '⚠ Contact form not yet activated. Please email me directly: yash4092003@gmail.com';
       return;
