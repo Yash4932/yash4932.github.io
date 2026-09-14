@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // === CHECK ACCESS KEY ===
     const keyField = document.getElementById('w3f_key');
-    if (!keyField || !keyField.value || keyField.value.trim() === '' || keyField.value === 'f4da3e41-6cfc-4776-ac6a-c92bbe3c826c') {
+    if (!keyField || !keyField.value || keyField.value.trim() === '' || keyField.value === 'YOUR_ACCESS_KEY') {
       formStatus.className = 'form-status show err';
       formStatus.textContent = '⚠ Contact form not yet activated. Please email me directly: yash4092003@gmail.com';
       return;
